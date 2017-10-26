@@ -1,0 +1,25 @@
+import * as assert from "intern/chai!assert";
+import * as registerSuite from "intern!object";
+
+import WidgetUnderTest = require("widgets/<%= path %><%= subWidgetName %>/<%= subWidgetName %>");
+
+registerSuite(function (): any {
+
+    var widget: WidgetUnderTest = null;
+
+    return {
+        name: "<%= subWidgetName %>",
+
+        beforeEach(): void {
+        },
+
+        // very simple test
+        "Create a TestContrast widget"(): void {
+            let create: () => void = () => {
+                let a: any = new WidgetUnderTest({}, "node");
+            };
+            assert.doesNotThrow(create);
+        },
+
+    };
+});

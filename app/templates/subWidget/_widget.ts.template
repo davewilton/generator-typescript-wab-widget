@@ -27,7 +27,7 @@ class <%=subWidgetName%> {
     baseClass: string = "<%= baseClass %>";
     templateString: string = template;
     nls: any = nls;
-	config: IConfig;
+    config: IConfig;
     map: Map;
 
     constructor(params: any, srcNodeRef: dojo.NodeOrString) {

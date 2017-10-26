@@ -126,8 +126,8 @@ var DojoWidgetGenerator = yeoman.Base.extend({
       this._templateFile('subWidget/_test_page.html', this.path + subNamePath + 'tests/' + subName + 'Test.html');
       this.copy('subWidget/tests.css', this.path + subNamePath + 'tests/tests.css');
 
-      //Jasmine tests
-      this._templateFile('subWidget/_specJasmine.ts', this.path + subNamePath + 'tests/spec/' + subName + 'Spec.ts');
+      // intern tests
+      this._templateFile('subWidget/_specIntern.ts.template', this.path + subNamePath + 'tests/spec/' + subName + 'Spec.ts');
 
 
     } catch (e) {
