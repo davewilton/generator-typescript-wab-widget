@@ -8,7 +8,7 @@ This generator scaffolds out the boilerplate files that are need each time you c
 
 * TypeScript Widgets.
 * Pure dojo widget inside the esri WAB BaseWidget.
-* Jasmine tests in TypeScript.
+* Intern tests in TypeScript.
 * A test page with the dojo widget for development outside of the WAB.
 
 
