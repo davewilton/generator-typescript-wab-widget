@@ -19,7 +19,7 @@ var expectedFiles = [
   'myTestWidget/myTest/resources/css/myTest.css',
   'myTestWidget/myTest/resources/nls/strings.js',
   'myTestWidget/myTest/resources/templates/myTest.html',
-  'myTestWidget/myTest/resources/IConfigMyTest.ts',
+  'myTestWidget/myTest/resources/IConfigmyTest.ts',
   'myTestWidget/myTest/resources/declareDecorator.ts',
 
   // tests
