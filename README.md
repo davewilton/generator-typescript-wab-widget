@@ -37,6 +37,24 @@ Navigate to your application's **widgets** folder and run the following at the c
 
 ```
 $ yo typescript-wab-widget
+
+```
+
+### tsconfig.json
+
+The following options should be set in the tsconfig (noImplicitUseStrict and experimentalDecorators):
+
+```
+{
+    "compilerOptions": {
+        "sourceMap": true,
+        "target": "es5",
+        "module": "amd",
+        "experimentalDecorators": true,
+        "moduleResolution": "classic",
+        "noImplicitUseStrict": true
+    }
+}
 ```
 
 ## License

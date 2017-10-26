@@ -3,5 +3,5 @@ node_js:
   - '4.2'
 before_install:
   - currentfolder=${PWD##*/}
-  - if [ "$currentfolder" != 'generator-ecl-wab-widget' ]; then cd .. && eval "mv $currentfolder generator-typescript-wab-widget" && cd generator-typescript-wab-widget; fi
+  - if [ "$currentfolder" != 'generator-typescript-wab-widget' ]; then cd .. && eval "mv $currentfolder generator-typescript-wab-widget" && cd generator-typescript-wab-widget; fi
 
