@@ -1,0 +1,51 @@
+/// <amd-dependency path="dojo/text!./resources/templates/<%=subWidgetName%>.html" name="template" />
+/// <amd-dependency path="dojo/i18n!widgets/<%=widgetName%>/<%=subWidgetName%>/resources/nls/strings" name="nls" />
+/// <amd-dependency path="xstyle/css!./resources/css/<%= subWidgetName %>.css" name="style" />
+declare var template: any;
+declare var nls: any;
+declare var style: any;
+
+// dojo
+import dojoDeclare = require("dojo/_base/declare");
+import lang = require("dojo/_base/lang");
+
+// dijit
+import WidgetBase = require("dijit/_WidgetBase");
+import TemplatedMixin = require("dijit/_TemplatedMixin");
+import WidgetsInTemplateMixin = require("dijit/_WidgetsInTemplateMixin");
+
+// esri
+import Map = require("esri/map");
+
+// local
+import IConfig = require("./resources/IConfig<%= subWidgetName %>");
+import declareDecorator = require("./resources/declareDecorator");
+
+@declareDecorator(WidgetBase, TemplatedMixin, WidgetsInTemplateMixin)
+class <%=subWidgetName%> {
+    // description: <%= description %>
+    baseClass: string = "<%= baseClass %>";
+    templateString: string = template;
+    nls: any = nls;
+	config: IConfig;
+    map: Map;
+
+    constructor(params: any, srcNodeRef: dojo.NodeOrString) {
+        // required for dojo inheritance to call the superclass
+        let self: any = this;
+        self.inherited(arguments);
+    }
+
+    startup(args?: any): void {
+        console.log(this.baseClass + "::startup", args);
+
+        // test the config file interface
+        console.log(this.config.serviceUrl);
+
+        // required for dojo inheritance to call the superclass
+        let self: any = this;
+        self.inherited(arguments);
+    }
+}
+
+export = <%=subWidgetName%>;

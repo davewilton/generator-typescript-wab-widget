@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+  <title>
+    <%= widgetName %> Tests</title>
+    <link rel="stylesheet" href="//js.arcgis.com/3.17/esri/css/esri.css"/>
+    <link rel="stylesheet" href="//js.arcgis.com/3.17/dojo/resources/dojo.css"/>
+    <link rel="stylesheet" href="//js.arcgis.com/3.17/dijit/themes/claro/claro.css" />
+  <style>
+      @import url('tests.css');
+     /* override default styles here */
+  </style>
+</head>
+
+<body class="claro">
+  <div id="map"></div>
+  <div id="widgetContainer">
+    <div id="widgetNode"></div>
+  </div>
+  <script type="text/javascript">
+        window.path = window.location.origin + '/' + window.location.pathname.split('/')[1] + "/";
+        var dojoConfig = {
+            tlmSiblingOfDojo: false, //if you don't have this it assumes widgets are relative to dojo not the path
+            packages: [
+                {
+                    name: "libs",
+                    location: window.path + "/libs"
+                },
+                {
+                    name: "jimu",
+                    location: window.path + "/jimu.js"
+                },
+                {
+                    name: "widgets",
+                    location: window.path + "/widgets"
+                }
+            ]
+        };
+    </script>
+  <script src="//js.arcgis.com/3.17/"></script>
+  <script type="text/javascript">
+        var testsUrl = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/')) + '/';
+        var widgetUnderTest;
+        var map;
+
+        require([
+           <%_ if (testPageMap === 1) { %>'esri/map', <% } 
+          else if (testPageMap === 2) { %>'esri/arcgis/utils',<% } _%>
+           testsUrl + '../<%= subWidgetName %>.js',
+           'dojo/text!' + testsUrl + '../../config.json',
+           'dojo/domReady!'
+        ], function(
+           <%_ if (testPageMap === 1) { %>Map,<% } else if (testPageMap === 2) { %>arcgisUtils,<% } _%>
+           Module,
+           config
+        ) {
+
+          var inArgs = {};
+           //read the default config file
+          inArgs.config = JSON.parse(config);
+          <%_ if (testPageMap) { _%>
+            // init map
+            var mapOptions = {
+                basemap: 'topo',
+                center: [-122.45,37.75],
+                zoom: 13,
+                sliderStyle: 'small'
+            };
+          <%_ } _%>
+
+          <%_ if (testPageMap === 1) { _%>
+            map = new Map('map', mapOptions);
+            // init widget
+            map.on('load', function(){
+              inArgs.map = map;
+              widgetUnderTest = new Module(inArgs, 'widgetNode');
+              widgetUnderTest.startup();
+            })
+         <%_ } _%>
+
+         <%_ if (testPageMap === 2) { %>
+            // this web map id is a placeholder
+            // with only the topo basemap
+            // replace it with the id of your web map
+            // replace below line if you are using portal
+            // arcgisUtils.arcgisUrl = "https://myserver/arcgis/sharing/rest/content/items";
+            var webMapItemID = '6e03e8c26aad4b9c92a87c1063ddb0e3';
+            arcgisUtils.createMap(webMapItemID, 'map', {
+              mapOptions: mapOptions
+            }).then(function(response) {
+              inArgs.map = response.map;
+              // init widget
+              widgetUnderTest = new Module(inArgs, 'widgetNode');
+              widgetUnderTest.startup();
+            });
+         <% } _%>
+     
+            <%_ if (testPageMap === 0) { _%>
+              // init widget
+              widgetUnderTest = new Module(inArgs, 'widgetNode');
+              widgetUnderTest.startup();
+            <%_ } _%>
+        });
+    </script>
+</body>
+
+</html>

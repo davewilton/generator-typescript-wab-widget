@@ -1,0 +1,1 @@
+"# generator-typescript-wab-widget" 
