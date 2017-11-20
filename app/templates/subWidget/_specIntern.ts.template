@@ -1,5 +1,7 @@
-import * as assert from "intern/chai!assert";
-import * as registerSuite from "intern!object";
+/// <amd-dependency path="intern/chai!assert" name="assert" />
+/// <amd-dependency path="intern!object" name="registerSuite" />
+declare var assert: any;
+declare var registerSuite: any;
 
 import WidgetUnderTest = require("widgets/<%= path %><%= subWidgetName %>/<%= subWidgetName %>");
 
