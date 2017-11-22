@@ -1,5 +1,5 @@
 /// <amd-dependency path="dojo/text!./resources/templates/<%=subWidgetName%>.html" name="template" />
-/// <amd-dependency path="dojo/i18n!widgets/<%=widgetName%>/<%=subWidgetName%>/resources/nls/strings" name="nls" />
+/// <amd-dependency path="dojo/i18n!./resources/nls/strings" name="nls" />
 /// <amd-dependency path="xstyle/css!./resources/css/<%= subWidgetName %>.css" name="style" />
 declare var template: any;
 declare var nls: any;
@@ -30,14 +30,18 @@ class <%=subWidgetName%> {
     config: IConfig;
     map: Map;
 
-    constructor(params: any, srcNodeRef: dojo.NodeOrString) {
-        // required for dojo inheritance to call the superclass
-        let self: any = this;
-        self.inherited(arguments);
+    /**
+     * Creates an instance of SearchWhereoil.
+     * @param {*} params parameters automatically assigned to class properties
+     * @param {dojo.NodeOrString} [srcNodeRef] optional node/node id to place widget on
+     * @memberof SearchWhereoil
+     */
+    constructor(params?: any, srcNodeRef?: dojo.NodeOrString) {
+        lang.mixin(this, params);
     }
 
     startup(args?: any): void {
-        console.log(this.baseClass + "::startup", args);
+        console.log(this.baseClass + "::startup");
 
         // test the config file interface
         console.log(this.config.serviceUrl);

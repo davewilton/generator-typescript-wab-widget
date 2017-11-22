@@ -3,7 +3,7 @@
 declare var assert: any;
 declare var registerSuite: any;
 
-import WidgetUnderTest = require("widgets/<%= path %><%= subWidgetName %>/<%= subWidgetName %>");
+import WidgetUnderTest = require("../../<%= subWidgetName %>");
 
 registerSuite(function (): any {
 
@@ -13,6 +13,7 @@ registerSuite(function (): any {
         name: "<%= subWidgetName %>",
 
         beforeEach(): void {
+			// actions before each test
         },
 
         // very simple test
