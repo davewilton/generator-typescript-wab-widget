@@ -23,12 +23,18 @@ import declareDecorator = require("./resources/declareDecorator");
 
 @declareDecorator(WidgetBase, TemplatedMixin, WidgetsInTemplateMixin)
 class <%=subWidgetName%> {
+
     // description: <%= description %>
-    baseClass: string = "<%= baseClass %>";
-    templateString: string = template;
-    nls: any = nls;
-    config: IConfig;
-    map: Map;
+	
+	// public properties
+	public domNode: HTMLElement;
+	
+	// private properties
+    private baseClass: string = "<%= baseClass %>";
+    private templateString: string = template;
+    private nls: any = nls;
+    private config: IConfig;
+    private map: Map;
 
     /**
      * Creates an instance of SearchWhereoil.
