@@ -25,11 +25,11 @@ import declareDecorator = require("./resources/declareDecorator");
 class <%=subWidgetName%> {
 
     // description: <%= description %>
-	
-	// public properties
-	public domNode: HTMLElement;
-	
-	// private properties
+
+    // public properties
+    public domNode: HTMLElement;
+
+    // private properties
     private baseClass: string = "<%= baseClass %>";
     private templateString: string = template;
     private nls: any = nls;
@@ -37,10 +37,10 @@ class <%=subWidgetName%> {
     private map: Map;
 
     /**
-     * Creates an instance of SearchWhereoil.
+     * Creates an instance of <%=subWidgetName%>.
      * @param {*} params parameters automatically assigned to class properties
      * @param {dojo.NodeOrString} [srcNodeRef] optional node/node id to place widget on
-     * @memberof SearchWhereoil
+     * @memberof <%=subWidgetName%>
      */
     constructor(params?: any, srcNodeRef?: dojo.NodeOrString) {
         lang.mixin(this, params);
