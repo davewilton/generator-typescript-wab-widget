@@ -1,11 +1,9 @@
-/// <amd-dependency path="intern/chai!assert" name="assert" />
-/// <amd-dependency path="intern!object" name="registerSuite" />
-declare var assert: any;
-declare var registerSuite: any;
+var registerSuite: any = intern.getInterface("object").registerSuite;
+var assert: Chai.Assert = intern.getPlugin("chai").assert;
 
 import WidgetUnderTest = require("../../<%= subWidgetName %>");
 
-registerSuite(function (): any {
+registerSuite("<%= subWidgetName %>", () => {
 
     var widget: WidgetUnderTest = null;
 
@@ -13,16 +11,18 @@ registerSuite(function (): any {
         name: "<%= subWidgetName %>",
 
         beforeEach(): void {
-			// actions before each test
+            // actions before each test
         },
 
-        // very simple test
-        "Create a TestContrast widget"(): void {
-            let create: () => void = () => {
-                let a: any = new WidgetUnderTest({}, "node");
-            };
-            assert.doesNotThrow(create);
-        },
+        tests: {
+            // very simple test
+            "Create a <%= subWidgetName %> widget"(): void {
+                let create: () => void = () => {
+                    let a: any = new WidgetUnderTest({}, "node");
+                };
+                assert.doesNotThrow(create);
+            },
+        }
 
     };
 });
