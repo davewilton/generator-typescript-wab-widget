@@ -10,16 +10,16 @@ import dojoDeclare = require("dojo/_base/declare");
 import lang = require("dojo/_base/lang");
 
 // dijit
-import WidgetBase = require("dijit/_WidgetBase");
 import TemplatedMixin = require("dijit/_TemplatedMixin");
+import WidgetBase = require("dijit/_WidgetBase");
 import WidgetsInTemplateMixin = require("dijit/_WidgetsInTemplateMixin");
 
 // esri
 import Map = require("esri/map");
 
 // local
-import IConfig = require("./resources/IConfig<%= subWidgetName %>");
 import declareDecorator = require("./resources/declareDecorator");
+import IConfig = require("./resources/IConfig<%= subWidgetName %>");
 
 @declareDecorator(WidgetBase, TemplatedMixin, WidgetsInTemplateMixin)
 class <%=subWidgetName%> {
@@ -46,14 +46,14 @@ class <%=subWidgetName%> {
         lang.mixin(this, params);
     }
 
-    startup(args?: any): void {
+    public startup(args?: any): void {
         console.log(this.baseClass + "::startup");
 
         // test the config file interface
         console.log(this.config.serviceUrl);
 
         // required for dojo inheritance to call the superclass
-        let self: any = this;
+        const self: any = this;
         self.inherited(arguments);
     }
 }

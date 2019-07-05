@@ -12,24 +12,23 @@ import Map = require("esri/map");
 import Module = require("./<%= subWidgetName %>/<%= subWidgetName %>");
 import declareDecorator = require("./<%= subWidgetName %>/resources/declareDecorator");
 
-
 @declareDecorator(BaseWidget)
 class Clazz {
 
      // description: <%= description %>
-    baseClass: "<%= baseClass %>";
-    widget: Module;
-    map: Map;
-    domNode: HTMLElement;
-    config: any;
+    public baseClass: "<%= baseClass %>";
+    public widget: Module;
+    public map: Map;
+    public domNode: HTMLElement;
+    public config: any;
 
     startup(args: any): void {
-        var self: any = this;
+        const self: any = this;
         self.inherited(arguments);
 
         // create an instance of our widget and place on the widget dom
-        var widgetDiv: HTMLElement = domConstruct.create("div", null, this.domNode);
-        var widget: Module = new Module({
+        const widgetDiv: HTMLElement = domConstruct.create("div", null, this.domNode);
+        const widget: Module = new Module({
             map: this.map,
             config: this.config
         }, widgetDiv);
@@ -38,9 +37,8 @@ class Clazz {
         this.widget = widget;
     }
 
-    // other BaseWidget widget methods: onOpen, onClose, onMinimize, onMaximize, onSignIn, onSignOut, onPositionChange, resize
+    // other BaseWidget widget methods: onOpen, onClose, onMinimize,
+    // onMaximize, onSignIn, onSignOut, onPositionChange, resize
 }
 
 export = Clazz;
-
-
