@@ -78,8 +78,10 @@ var DojoWidgetGenerator = yeoman.Base.extend({
 
 
         done();
-
+        console.log("done")
+ 
       } catch (e) {
+        console.log(e)
         this.log(chalk.red(e));
       }
     }.bind(this));
@@ -88,6 +90,7 @@ var DojoWidgetGenerator = yeoman.Base.extend({
   writing: function () {
 
     try {
+      console.log("writing")
       //this will beautify our files, in particular the html files. It will not touch the ts files
       this.registerTransformStream(prettify());
 
