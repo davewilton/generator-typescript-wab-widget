@@ -47,8 +47,7 @@ describe('generator', function () {
         .inDir(tempPath)
         .withPrompts({
           'widgetName': 'myTestWidget',
-          'description': 'test description',
-          'widgetsInTemplate': true
+          'description': 'test description'
         })
         .on('end', done);
     });
@@ -71,8 +70,7 @@ describe('generator', function () {
         .withPrompts({
           'widgetName': 'myTestWidget',
           'description': 'test description',
-          'widgetsInTemplate': true,
-          testPageMap: 'No map'
+          'testPageMap': 'No map'
         })
         .on('end', done);
     });
@@ -94,8 +92,7 @@ describe('generator', function () {
         .withPrompts({
           'widgetName': 'myTestWidget',
           'description': 'test description',
-          'widgetsInTemplate': true,
-          testPageMap: 'Empty map - i.e. new Map()'
+          'testPageMap': 'Empty map - i.e. new Map()'
         })
         .on('end', done);
     });

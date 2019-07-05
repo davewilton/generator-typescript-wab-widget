@@ -40,7 +40,7 @@ var DojoWidgetGenerator = yeoman.Base.extend({
 
     return this.prompt(prompts).then(function (props) {
       this.props = props;
-
+      console.log( this.props)
       try {
 
         this.props.widgetName = trim(props.widgetName);
