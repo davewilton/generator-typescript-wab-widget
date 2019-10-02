@@ -1,6 +1,6 @@
 {
   "name": "generator-typescript-wab-widget",
-  "version": "0.2.38",
+  "version": "0.2.39",
   "description": "Yeoman generator for creating Esri WebApp Builder widgets in typescript",
   "license": "MIT",
   "main": "app/index.js",
