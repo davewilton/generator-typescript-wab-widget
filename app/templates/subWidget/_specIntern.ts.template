@@ -1,5 +1,6 @@
-var registerSuite: any = intern.getInterface("object").registerSuite;
-var assert: Chai.Assert = intern.getPlugin("chai").assert;
+declare var intern: any;  // remove this
+const registerSuite: any = intern.getInterface("object").registerSuite;
+const assert: Chai.Assert = intern.getPlugin("chai").assert;
 
 import WidgetUnderTest = require("../../<%= subWidgetName %>");
 
@@ -17,11 +18,11 @@ registerSuite("<%= subWidgetName %>", () => {
         tests: {
             // very simple test
             "Create a <%= subWidgetName %> widget"(): void {
-                let create: () => void = () => {
-                    let a: any = new WidgetUnderTest({}, "node");
+                const create: () => void = () => {
+                    const a: any = new WidgetUnderTest({}, "node");
                 };
                 assert.doesNotThrow(create);
-            },
+            }
         }
 
     };

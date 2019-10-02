@@ -49,7 +49,7 @@
         require([
            <%_ if (testPageMap === 1) { %>'esri/map', <% } 
           else if (testPageMap === 2) { %>'esri/arcgis/utils',<% } _%>
-           testsUrl + '../<%= subWidgetName %>.js',
+           'widgets/<%= widgetName %>/<%= subWidgetName %>',
            'dojo/text!' + testsUrl + '../../config.json',
            'dojo/domReady!'
         ], function(
