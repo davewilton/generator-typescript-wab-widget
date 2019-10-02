@@ -22,7 +22,7 @@ class Clazz {
     public domNode: HTMLElement;
     public config: any;
 
-    startup(args: any): void {
+    public startup(args: any): void {
         const self: any = this;
         self.inherited(arguments);
 
