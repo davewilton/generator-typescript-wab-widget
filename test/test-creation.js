@@ -24,9 +24,11 @@ var expectedFiles = [
 
   // test page
   'myTestWidget/myTest/tests/tests.css',
-  'myTestWidget/myTest/tests/myTestTest.html'
+  'myTestWidget/myTest/tests/index.html',
 
   // settings
+  'myTestWidget/setting/Setting.ts',
+  'myTestWidget/setting/Setting.html'
   
 ];
 
@@ -82,7 +84,7 @@ describe('generator', function () {
     });
 
     it('creates a template file has no map', function () {
-      assert.noFileContent('myTestWidget/myTest/tests/myTestTest.html', /map\W?=/);
+      assert.noFileContent('myTestWidget/myTest/tests/index.html', /map\W?=/);
     });
   });
 
@@ -105,7 +107,7 @@ describe('generator', function () {
 
 
     it('creates a template file with new Map()', function () {
-      assert.fileContent('myTestWidget/myTest/tests/myTestTest.html', /map\W?=\W?new Map\(/);
+      assert.fileContent('myTestWidget/myTest/tests/index.html', /map\W?=\W?new Map\(/);
     });
   });
 
@@ -128,7 +130,7 @@ describe('generator', function () {
     });
 
     it('creates a template file with arcgisUtils.createMap()', function () {
-      assert.fileContent('myTestWidget/myTest/tests/myTestTest.html', /map\W?=\W?response\.map;/);
+      assert.fileContent('myTestWidget/myTest/tests/index.html', /map\W?=\W?response\.map;/);
     });
   });
 
