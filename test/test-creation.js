@@ -22,9 +22,12 @@ var expectedFiles = [
   'myTestWidget/myTest/resources/IConfigmyTest.ts',
   'myTestWidget/myTest/resources/declareDecorator.ts',
 
-  // tests
+  // test page
   'myTestWidget/myTest/tests/tests.css',
   'myTestWidget/myTest/tests/myTestTest.html'
+
+  // settings
+  
 ];
 
 describe('generator', function () {
