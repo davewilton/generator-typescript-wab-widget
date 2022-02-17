@@ -26,13 +26,13 @@
     "widget"
   ],
   "dependencies": {
-    "chalk": "*",
+    "chalk": "2.4.2",
     "gulp-jsbeautifier": "^2.0.3",
+    "trim": "0.0.3",
     "underscore.string": "^3.3.4",
     "update-notifier": "^1.0.2",
     "yeoman-generator": "^3.1.1",
-    "yosay": "^1.2.0",
-    "trim": "0.0.3"
+    "yosay": "^1.2.0"
   },
   "devDependencies": {
     "del": "^2.2.2",
