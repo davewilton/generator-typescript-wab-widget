@@ -135,7 +135,7 @@ module.exports = class extends Generator {
       this.fs.copyTpl(this.templatePath('subWidget/resources/declareDecorator.ts'), resourcesDir + 'declareDecorator.ts');
 
       // html template test 
-      this._templateFile('subWidget/_test_page.html', this.path + subNamePath + 'tests/' + subName + 'Test.html');
+      this._templateFile('subWidget/_test_page.html', this.path + subNamePath + 'tests/' + 'index.html');
       this.fs.copyTpl(this.templatePath('subWidget/tests.css'), this.path + subNamePath + 'tests/tests.css');
 
 
