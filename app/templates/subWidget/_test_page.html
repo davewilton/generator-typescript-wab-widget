@@ -6,9 +6,9 @@
   <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
   <title>
     <%= widgetName %> Tests</title>
-    <link rel="stylesheet" href="//js.arcgis.com/3.17/esri/css/esri.css"/>
-    <link rel="stylesheet" href="//js.arcgis.com/3.17/dojo/resources/dojo.css"/>
-    <link rel="stylesheet" href="//js.arcgis.com/3.17/dijit/themes/claro/claro.css" />
+    <link rel="stylesheet" href="//js.arcgis.com/3.39/esri/css/esri.css"/>
+    <link rel="stylesheet" href="//js.arcgis.com/3.39/dojo/resources/dojo.css"/>
+    <link rel="stylesheet" href="//js.arcgis.com/3.39/dijit/themes/claro/claro.css" />
   <style>
       @import url('tests.css');
      /* override default styles here */
@@ -22,6 +22,10 @@
   </div>
   <script type="text/javascript">
         window.path = window.location.origin + '/' + window.location.pathname.split('/')[1] + "/";
+        // running in WAB Builder location
+        if( window.location.origin.indexOf("widgets" > 0)) {
+            window.path = window.location.origin + window.location.pathname.split('widgets')[0];
+        }
         var dojoConfig = {
             tlmSiblingOfDojo: false, //if you don't have this it assumes widgets are relative to dojo not the path
             packages: [
@@ -40,7 +44,7 @@
             ]
         };
     </script>
-  <script src="//js.arcgis.com/3.17/"></script>
+  <script src="//js.arcgis.com/3.39/"></script>
   <script type="text/javascript">
         var testsUrl = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/')) + '/';
         var widgetUnderTest;
@@ -49,7 +53,7 @@
         require([
            <%_ if (testPageMap === 1) { %>'esri/map', <% } 
           else if (testPageMap === 2) { %>'esri/arcgis/utils',<% } _%>
-           'widgets/<%= widgetName %>/<%= subWidgetName %>',
+           'widgets/<%= widgetName %>/<%= subWidgetName %>/<%= subWidgetName %>',
            'dojo/text!' + testsUrl + '../../config.json',
            'dojo/domReady!'
         ], function(
