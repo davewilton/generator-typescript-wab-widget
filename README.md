@@ -10,7 +10,6 @@ It creates:
 
 * TypeScript Widgets.
 * Pure dojo widget inside the esri WAB BaseWidget.
-* Intern tests in TypeScript.
 * A test html page with the dojo widget for development outside of the WAB.
 
 A sample of the generated TypeScript widget can be viewed [here](https://gist.github.com/davewilton/352c6c9f93102cddf62e459be5be7b69)

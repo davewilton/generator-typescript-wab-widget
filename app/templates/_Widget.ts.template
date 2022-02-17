@@ -1,5 +1,5 @@
 /// <amd-dependency path="jimu/BaseWidget" name="BaseWidget" />
-declare var BaseWidget: any; // there is no ts definition of BaseWidget yet
+declare let BaseWidget: any; // there is no ts definition of BaseWidget yet
 
 // dojo
 import dojoDeclare = require("dojo/_base/declare");
@@ -9,15 +9,15 @@ import domConstruct = require("dojo/dom-construct");
 import Map = require("esri/map");
 
 // local
-import Module = require("./<%= subWidgetName %>/<%= subWidgetName %>");
+import <%= subWidgetName %> = require("./<%= subWidgetName %>/<%= subWidgetName %>");
 import declareDecorator = require("./<%= subWidgetName %>/resources/declareDecorator");
 
 @declareDecorator(BaseWidget)
-class Clazz {
+class Widget {
 
      // description: <%= description %>
     public baseClass: "<%= baseClass %>";
-    public widget: Module;
+    public widget: <%= subWidgetName %>;
     public map: Map;
     public domNode: HTMLElement;
     public config: any;
@@ -28,17 +28,16 @@ class Clazz {
 
         // create an instance of our widget and place on the widget dom
         const widgetDiv: HTMLElement = domConstruct.create("div", null, this.domNode);
-        const widget: Module = new Module({
+        this.widget = new <%= subWidgetName %>({
             map: this.map,
             config: this.config
         }, widgetDiv);
 
-        widget.startup();
-        this.widget = widget;
+        this.widget.startup();
     }
 
     // other BaseWidget widget methods: onOpen, onClose, onMinimize,
     // onMaximize, onSignIn, onSignOut, onPositionChange, resize
 }
 
-export = Clazz;
+export = Widget;

@@ -1,9 +1,9 @@
 /// <amd-dependency path="dojo/text!./resources/templates/<%=subWidgetName%>.html" name="template" />
 /// <amd-dependency path="dojo/i18n!./resources/nls/strings" name="nls" />
 /// <amd-dependency path="xstyle/css!./resources/css/<%= subWidgetName %>.css" name="style" />
-declare var template: any;
-declare var nls: any;
-declare var style: any;
+declare let template: any;
+declare let nls: any;
+declare let style: any;
 
 // dojo
 import dojoDeclare = require("dojo/_base/declare");
@@ -30,23 +30,25 @@ class <%=subWidgetName%> {
     public domNode: HTMLElement;
 
     // private properties
-    private baseClass: string = "<%= baseClass %>";
-    private templateString: string = template;
+    public baseClass: string = "<%= baseClass %>";
+    public templateString: string = template;
+    public map: Map;
     private nls: any = nls;
     private config: IConfig;
-    private map: Map;
+
 
     /**
      * Creates an instance of <%=subWidgetName%>.
-     * @param {*} params parameters automatically assigned to class properties
+     * @param {{config: IConfig, map: Map}} params
      * @param {dojo.NodeOrString} [srcNodeRef] optional node/node id to place widget on
      * @memberof <%=subWidgetName%>
      */
-    constructor(params?: any, srcNodeRef?: dojo.NodeOrString) {
-        lang.mixin(this, params);
+    constructor(params?: {config: IConfig, map: Map}, srcNodeRef?: dojo.NodeOrString) {
+        this.map = params.map;
+        this.config = params.config;
     }
 
-    public startup(args?: any): void {
+    public startup(): void {
         console.log(this.baseClass + "::startup");
 
         // test the config file interface

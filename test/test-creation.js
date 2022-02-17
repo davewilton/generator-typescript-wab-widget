@@ -24,8 +24,7 @@ var expectedFiles = [
 
   // tests
   'myTestWidget/myTest/tests/tests.css',
-  'myTestWidget/myTest/tests/myTestTest.html',
-  'myTestWidget/myTest/tests/spec/myTestSpec.ts'
+  'myTestWidget/myTest/tests/myTestTest.html'
 ];
 
 describe('generator', function () {

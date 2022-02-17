@@ -16,9 +16,9 @@
     "hasConfig": <%= hasConfig %>,
     "hasUIFile": <%= hasUIFile %>,
     "hasSettingPage": <%= hasSettingPage %>,
-    "hasSettingUIFile": <%= hasSettingUIFile %>,
-    "hasSettingLocale": <%= hasSettingLocale %>,
-    "hasSettingStyle": <%= hasSettingStyle %>,
+    "hasSettingUIFile": <%= hasSettingPage %>,
+    "hasSettingLocale": <%= hasSettingPage %>,
+    "hasSettingStyle": <%= hasSettingPage %>,
     "IsController": false
   }
 }

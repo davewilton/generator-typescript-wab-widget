@@ -1,5 +1,5 @@
 'use strict';
-var yeoman = require('yeoman-generator');
+var Generator = require('yeoman-generator');
 var chalk = require('chalk');
 var dasherize = require('underscore.string/dasherize');
 var updateNotifier = require('update-notifier');
@@ -9,16 +9,19 @@ var prettify = require('gulp-jsbeautifier');
 var yosay = require('yosay');
 var trim = require('trim');
 
-var DojoWidgetGenerator = yeoman.Base.extend({
 
-  prompting: function () {
+module.exports = class extends Generator {
 
+  initializing() {
+  }
+
+  prompting() {
     var done = this.async();
     var testPageMapChoices = ['No map', 'Empty map - i.e. new Map()', 'Web map - i.e. arcgisUtils.createMap()'];
 
     // Have Yeoman greet the user.
     this.log(yosay('Welcome to the ecl-wab-widget generator!'));
-    this.log(chalk.yellow('It is best to run this generator within the "Widgets" folder of a WAB application'));
+    this.log(chalk.yellow('NOW It is best to run this generator within the "Widgets" folder of a WAB application'));
 
     //check fot updates
     updateNotifier({ pkg: pkg, updateCheckInterval: 10000 }).notify();
@@ -36,11 +39,16 @@ var DojoWidgetGenerator = yeoman.Base.extend({
         message: 'What kind of map would you like in the test page?',
         choices: testPageMapChoices,
         'default': 2
-      }];
+      },
+      {
+        type: 'confirm',
+        message: 'Would you like a settings page?',
+        name: 'hasSettingPage'
+      }
+    ];
 
-    return this.prompt(prompts).then(function (props) {
+   this.prompt(prompts).then(function (props) {
       this.props = props;
-      console.log( this.props)
       try {
 
         this.props.widgetName = trim(props.widgetName);
@@ -66,35 +74,36 @@ var DojoWidgetGenerator = yeoman.Base.extend({
         this.props.hasLocale = false; // Our sub widget will contain the nls
         this.props.hasStyle = false; // Our sub widget will contain the style
         this.props.hasUIFile = false; // Our sub widget will contain the UI
-        this.props.hasSettingPage = false; // not supported at present
 
         // settings choices
         // settings
         this.props.hasSettingPage = props.hasSettingPage;
-        this.props.hasSettingUIFile = this.hasSettingPage ? (props.settingsFeatures.indexOf('hasSettingUIFile') > -1) : false;
-        this.props.hasSettingLocale = this.hasSettingPage ? (props.settingsFeatures.indexOf('hasSettingLocale') > -1) : false;
-        this.props.hasSettingStyle = this.hasSettingPage ? (props.settingsFeatures.indexOf('hasSettingStyle') > -1) : false;
         this.props.needsManifestProps = (!this.inPanel || !this.hasLocale);
 
 
         done();
-        console.log("done")
  
       } catch (e) {
         console.log(e)
         this.log(chalk.red(e));
       }
     }.bind(this));
-  },
+  }
 
-  writing: function () {
+    paths() {
+      this.destinationRoot('widgets')
+      // returns '~/projects'
+    }
+
+  writing() {
 
     try {
-      console.log("writing")
+
       //this will beautify our files, in particular the html files. It will not touch the ts files
       this.registerTransformStream(prettify());
 
       this.path = this.props.path;
+      this.destinationPath('widgets/')
 
       this._templateFile('_Widget.ts.template', this.path + 'Widget.ts');
       if (this.props.hasUIFile) {
@@ -107,7 +116,7 @@ var DojoWidgetGenerator = yeoman.Base.extend({
         this._templateFile('css/_style.css', this.path + 'css/style.css');
       }
 
-      this.copy('images/icon.png', this.path + 'images/icon.png');
+      this.fs.copyTpl(this.templatePath('images/icon.png'), this.path + 'images/icon.png');
       this._templateFile('_manifest.json', this.path + 'manifest.json');
 
 
@@ -123,22 +132,29 @@ var DojoWidgetGenerator = yeoman.Base.extend({
       this._templateFile('subWidget/nls/_strings.js', resourcesDir + 'nls/strings.js');
       this._templateFile('subWidget/_widget.css', resourcesDir + 'css/' + subName + '.css');
       this._templateFile('subWidget/_IConfig.ts.template', resourcesDir + "IConfig" + subName + '.ts');
-      this.copy('subWidget/resources/declareDecorator.ts', resourcesDir + 'declareDecorator.ts');
+      this.fs.copyTpl(this.templatePath('subWidget/resources/declareDecorator.ts'), resourcesDir + 'declareDecorator.ts');
 
       // html template test 
       this._templateFile('subWidget/_test_page.html', this.path + subNamePath + 'tests/' + subName + 'Test.html');
-      this.copy('subWidget/tests.css', this.path + subNamePath + 'tests/tests.css');
+      this.fs.copyTpl(this.templatePath('subWidget/tests.css'), this.path + subNamePath + 'tests/tests.css');
 
-      // intern tests
-      this._templateFile('subWidget/_specIntern.ts.template', this.path + subNamePath + 'tests/spec/' + subName + 'Spec.ts');
+
+      // settings
+      if(this.props.hasSettingPage){
+        this._templateFile('setting/_Setting.ts', this.path + 'setting/Setting.ts');
+        this._templateFile('setting/_Setting.html',  this.path + 'setting/Setting.html');
+        this._templateFile('setting/nls/_strings.js', this.path +  'setting/nls/strings.js');
+        this._templateFile('setting/css/_style.css',  this.path +  'setting/css/style.css');
+      }
+
 
 
     } catch (e) {
       this.log(chalk.red(e));
     }
-  },
+  }
 
-  _templateFile: function (src, dest) {
+  _templateFile(src, dest) {
     //function to update to new method of source and dest
     this.fs.copyTpl(
       this.templatePath(src),
@@ -147,6 +163,4 @@ var DojoWidgetGenerator = yeoman.Base.extend({
     );
   }
 
-});
-
-module.exports = DojoWidgetGenerator;
+}
